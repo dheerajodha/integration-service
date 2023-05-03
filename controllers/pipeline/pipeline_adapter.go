@@ -484,7 +484,7 @@ func (a *Adapter) prepareSnapshot(application *applicationapiv1alpha1.Applicatio
 		// which multiple components are being built in close succession.
 		// We omit this not-yet-built component from the snapshot rather than
 		// including a component that is incomplete.
-		if containerImage == "" {
+		if containerImage == "" || !strings.Contains(containerImage, "@sha256:") {
 			continue
 		}
 		snapshotComponents = append(snapshotComponents, applicationapiv1alpha1.SnapshotComponent{

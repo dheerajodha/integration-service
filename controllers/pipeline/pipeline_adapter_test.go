@@ -176,7 +176,7 @@ var _ = Describe("Pipeline Adapter", Ordered, func() {
 		}
 		Expect(k8sClient.Create(ctx, hasComp2)).Should(Succeed())
 
-		sampleImage := "quay.io/redhat-appstudio/sample-image"
+		sampleImage := "quay.io/redhat-appstudio/sample-image@sha256:01ce8829fb48f7a43fef599c3909522c7a2339640b693c091bd490c3efc1feec"
 
 		hasSnapshot = &applicationapiv1alpha1.Snapshot{
 			ObjectMeta: metav1.ObjectMeta{
@@ -305,7 +305,7 @@ var _ = Describe("Pipeline Adapter", Ordered, func() {
 				PipelineResults: []tektonv1beta1.PipelineRunResult{
 					{
 						Name:  "IMAGE_DIGEST",
-						Value: *tektonv1beta1.NewArrayOrString("image_digest_value"),
+						Value: *tektonv1beta1.NewArrayOrString("sha256:01ce8829fb48f7a43fef599c3909522c7a2339640b693c091bd490c3efc1feec"),
 					},
 					{
 						Name:  "IMAGE_URL",
@@ -495,7 +495,7 @@ var _ = Describe("Pipeline Adapter", Ordered, func() {
 			Spec: applicationapiv1alpha1.ComponentSpec{
 				ComponentName:  "component-sample-2",
 				Application:    hasApp.Name,
-				ContainerImage: "quay.io/redhat-appstudio/sample-image:new-label",
+				ContainerImage: "quay.io/redhat-appstudio/sample-image@sha256:123fs2n423j454546",
 				Source: applicationapiv1alpha1.ComponentSource{
 					ComponentSourceUnion: applicationapiv1alpha1.ComponentSourceUnion{
 						GitSource: &applicationapiv1alpha1.GitSource{
